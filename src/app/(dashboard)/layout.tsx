@@ -5,5 +5,5 @@ import { hasValidSession } from "@/lib/auth";
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   if (!(await hasValidSession())) redirect("/login");
-  return <><Nav/><main className="container-app py-7 sm:py-10">{children}</main><footer className="container-app border-t border-[#1d251f] py-8 text-center text-xs text-[#59645d]">Minecraft Extremo Tracker · construido para sobrevivir juntos</footer></>;
+  return <><Nav/><main className="container-app py-7 sm:py-10">{children}</main><footer className="container-app mb-5 border-t border-white/8 py-8 text-center text-xs text-[#59645d]">Hardcore Realm Log · construido para sobrevivir juntos</footer></>;
 }

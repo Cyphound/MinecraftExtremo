@@ -25,7 +25,7 @@ export const demoRuns: Run[] = rawRuns.map((run) => ({
 
 export const demoPunishments: Punishment[] = [
   { id: "30000000-0000-0000-0000-000000000002", punishment_number: 2, run_ids: rawRuns.slice(2, 5).map((run) => run.id), punished_player_id: players[0].id, instagram_note: null, occurred_at: "2026-09-07T19:43:00Z", status: "pending", created_at: "2026-09-07T19:43:00Z", punished_player: players[0] },
-  { id: "30000000-0000-0000-0000-000000000001", punishment_number: 1, run_ids: rawRuns.slice(6, 9).map((run) => run.id), punished_player_id: players[2].id, instagram_note: "No vuelvo a saltar sin cubeta 💧", occurred_at: "2026-08-24T18:38:00Z", status: "completed", created_at: "2026-08-24T18:38:00Z", punished_player: players[2] },
+  { id: "30000000-0000-0000-0000-000000000001", punishment_number: 1, run_ids: rawRuns.slice(6, 9).map((run) => run.id), punished_player_id: players[2].id, instagram_note: "No vuelvo a saltar sin cubeta", occurred_at: "2026-08-24T18:38:00Z", status: "completed", created_at: "2026-08-24T18:38:00Z", punished_player: players[2] },
 ];
 
 export const demoEvents: RunEvent[] = [
