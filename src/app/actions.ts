@@ -23,6 +23,34 @@ async function ready() {
   return createAdminClient();
 }
 
+const playerSchema = z.object({
+  name: z.string().trim().min(1, "Escribe el nombre del jugador.").max(60),
+  nickname: z.string().trim().max(60).optional(),
+  avatarUrl: z.string().trim().max(500).optional(),
+});
+
+export async function createPlayerAction(_: ActionState, formData: FormData): Promise<ActionState> {
+  try {
+    const parsed = playerSchema.parse({
+      name: formData.get("name"),
+      nickname: formData.get("nickname") || undefined,
+      avatarUrl: formData.get("avatarUrl") || undefined,
+    });
+    const supabase = await ready();
+    const { error } = await supabase.from("players").insert({
+      name: parsed.name,
+      nickname: parsed.nickname || null,
+      avatar_url: parsed.avatarUrl || null,
+    });
+    if (error) throw error;
+    refreshAll();
+    revalidatePath("/players");
+    return { success: "Jugador registrado en el Realm." };
+  } catch (error) {
+    return { error: errorMessage(error) };
+  }
+}
+
 export async function loginAction(_: ActionState, formData: FormData): Promise<ActionState> {
   const password = String(formData.get("password") ?? "");
   if (!process.env.APP_PASSWORD) return { error: "Configura APP_PASSWORD antes de acceder." };

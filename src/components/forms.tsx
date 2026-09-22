@@ -2,8 +2,8 @@
 
 import { useActionState, useRef, useState, type ReactNode } from "react";
 import { useFormStatus } from "react-dom";
-import { CircleCheck, Skull, X } from "lucide-react";
-import { loginAction, registerDeathAction, updatePunishmentAction, updateRunAction, type ActionState } from "@/app/actions";
+import { CircleCheck, ImagePlus, Skull, UserPlus, X } from "lucide-react";
+import { createPlayerAction, loginAction, registerDeathAction, updatePunishmentAction, updateRunAction, type ActionState } from "@/app/actions";
 import { DEATH_CAUSES, DIMENSIONS, PROGRESS_STAGES } from "@/lib/game-config";
 import type { Player, Punishment, Run } from "@/types/database";
 
@@ -20,6 +20,22 @@ function Message({ state }: { state: ActionState }) {
 export function LoginForm() {
   const [state, action, pending] = useActionState(loginAction, undefined);
   return <form action={action} className="grid gap-4"><label className="label">Contraseña compartida<input className="input" name="password" type="password" autoComplete="current-password" required autoFocus placeholder="••••••••••••"/></label><Message state={state}/><button className="btn btn-primary w-full" disabled={pending}>{pending ? "Entrando…" : "Entrar al panel"}</button></form>;
+}
+
+export function PlayerRegistrationForm({ disabled }: { disabled?: boolean }) {
+  const [state, action] = useActionState(createPlayerAction, undefined);
+  return <form action={action} className="grid gap-4">
+    <div className="flex items-start gap-3 rounded-2xl border border-[#604578] bg-[#1d1328]/70 p-4">
+      <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-[#76518a] bg-[#321d40] text-[#d996ff]"><UserPlus size={19}/></span>
+      <p className="text-sm leading-relaxed text-[#b9aec2]">Este Realm usa una contraseña compartida. Aquí solo registras el perfil visible de cada jugador.</p>
+    </div>
+    <label className="label">Nombre del jugador<input className="input" name="name" required maxLength={60} placeholder="Ej. Bayron" disabled={disabled}/></label>
+    <label className="label">Nickname <span className="font-normal text-[#776d80]">(opcional)</span><input className="input" name="nickname" maxLength={60} placeholder="Ej. cyphound" disabled={disabled}/></label>
+    <label className="label"><span className="flex items-center gap-2">Avatar <span className="font-normal text-[#776d80]">(opcional)</span><ImagePlus size={14} className="text-[#b58cff]"/></span><input className="input" name="avatarUrl" type="url" maxLength={500} placeholder="https://…" disabled={disabled}/></label>
+    <Message state={state}/>
+    {disabled && <p className="text-xs text-[#f6c85f]">Vista previa: conecta Supabase para registrar jugadores.</p>}
+    <Submit className="btn btn-primary justify-self-start" disabled={disabled}><UserPlus size={17}/> Registrar jugador</Submit>
+  </form>;
 }
 
 export function DeathDialog({ players, disabled }: { players: Player[]; disabled?: boolean }) {

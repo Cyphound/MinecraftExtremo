@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { BarChart3, DoorOpen, History, LayoutDashboard, ShieldAlert, Skull } from "lucide-react";
+import { BarChart3, DoorOpen, History, LayoutDashboard, ShieldAlert, Skull, UsersRound } from "lucide-react";
 import { logoutAction } from "@/app/actions";
 import { RealmMark } from "@/components/brand";
 
@@ -13,6 +13,7 @@ const links = [
   { href: "/history", label: "Historial", icon: History },
   { href: "/stats", label: "Estadísticas", icon: BarChart3 },
   { href: "/punishments", label: "Castigos", icon: ShieldAlert },
+  { href: "/players", label: "Jugadores", icon: UsersRound },
 ];
 
 export function Nav({ totalDeaths, currentTry }: { totalDeaths: number; currentTry: number | null }) {

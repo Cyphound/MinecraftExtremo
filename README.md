@@ -12,6 +12,7 @@ Si uno muere, el TRY termina para todos. La aplicación conserva lo que el mundo
 
 - Dashboard privado con el TRY activo, cronómetro y acciones críticas.
 - Navegación lateral con el estado del Realm y el contador total de muertes.
+- Registro de perfiles de jugadores en `/players` para arrancar cada temporada con el escuadrón correcto.
 - Identidad visual obsidiana–amatista, superficies de cristal y secciones inspiradas en Overworld, Nether y The End.
 - Historial completo de intentos con correcciones y bitácora de eventos.
 - Estadísticas derivadas: rachas, progreso máximo, causas y dimensiones más mortales.
@@ -75,6 +76,8 @@ npx supabase db push
 ```
 
 Las migraciones crean `players`, `runs`, `events` y `punishments`, junto con sus índices, constraints y funciones transaccionales. `supabase/seed.sql` carga los tres jugadores y una temporada de ejemplo; `supabase/reset_demo.sql` elimina únicamente esas filas reservadas.
+
+La aplicación no crea cuentas personales de Supabase Auth: el acceso sigue siendo compartido y los perfiles se registran desde la sección Jugadores. La temporada de producción se puede reiniciar eliminando datos en este orden: `events`, `punishments`, `runs`, `players`.
 
 ## Seguridad
 
