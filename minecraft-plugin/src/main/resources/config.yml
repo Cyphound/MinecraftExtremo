@@ -1,0 +1,9 @@
+# URL pública de la aplicación, sin slash final.
+api-url: "https://MI-DOMINIO.vercel.app"
+
+# Debe coincidir con MINECRAFT_WEBHOOK_SECRET en Vercel.
+# No publiques este archivo con el secreto configurado.
+api-secret: ""
+
+# Tiempo máximo por intento HTTP, en milisegundos.
+request-timeout: 5000

@@ -17,7 +17,7 @@ export default async function OverlayPage() {
 
   return (
     <main className="voxel-grid min-h-screen p-5 sm:p-10">
-      <AutoRefresh />
+      <AutoRefresh interval={3000} />
       <PageReveal>
         <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl content-between gap-10">
           <header className="glass-shell flex flex-wrap items-end justify-between gap-6 rounded-[1.6rem] p-6 sm:p-8">

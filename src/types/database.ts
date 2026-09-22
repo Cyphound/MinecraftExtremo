@@ -7,6 +7,7 @@ export interface Player {
   name: string;
   nickname: string | null;
   avatar_url: string | null;
+  minecraft_uuid?: string | null;
   created_at: string;
 }
 
@@ -22,6 +23,7 @@ export interface Run {
   death_cause: string | null;
   dimension: Dimension | null;
   comment: string | null;
+  minecraft_death_message?: string | null;
   created_at: string;
   dead_player?: Player | null;
 }

@@ -1,0 +1,21 @@
+name: MinecraftExtremo
+version: 1.0.0
+main: cl.cyphound.minecraftextremo.MinecraftExtremoPlugin
+api-version: '1.21'
+author: Cyphound
+description: Integra un Realm Hardcore de Paper con Minecraft Extremo Tracker.
+
+commands:
+  nextry:
+    description: Prepara el estado local para el siguiente TRY.
+    usage: /nextry [confirm]
+    permission: minecraftextremo.admin
+  extremo:
+    description: Estado y diagnóstico de Minecraft Extremo.
+    usage: /extremo <status|test>
+    permission: minecraftextremo.admin
+
+permissions:
+  minecraftextremo.admin:
+    description: Permite administrar y probar Minecraft Extremo.
+    default: op
