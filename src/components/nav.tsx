@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { BarChart3, DoorOpen, History, LayoutDashboard, ShieldAlert, Skull } from "lucide-react";
 import { logoutAction } from "@/app/actions";
@@ -16,6 +17,10 @@ const links = [
 
 export function Nav({ totalDeaths, currentTry }: { totalDeaths: number; currentTry: number | null }) {
   const pathname = usePathname();
+  const [pending, setPending] = useState<{ path: string; from: string } | null>(null);
+  const pendingPath = pending?.from === pathname ? pending.path : null;
+  const isPending = pendingPath !== null;
+  const activePath = pendingPath ?? pathname;
 
   return (
     <motion.aside
@@ -34,11 +39,18 @@ export function Nav({ totalDeaths, currentTry }: { totalDeaths: number; currentT
         <div><small>Realm activo</small><strong>TRY #{currentTry?.toString().padStart(2, "0") ?? "—"}</strong></div>
       </div>
 
-      <nav className="sidebar-nav" aria-label="Navegación principal">
+      <nav className="sidebar-nav" aria-label="Navegación principal" aria-busy={isPending}>
         {links.map(({ href, label, icon: Icon }) => {
-          const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+          const active = href === "/" ? activePath === "/" : activePath.startsWith(href);
           return (
-            <Link key={href} href={href} aria-current={active ? "page" : undefined} className={active ? "sidebar-link sidebar-link--active" : "sidebar-link"}>
+            <Link
+              key={href}
+              href={href}
+              prefetch
+              aria-current={active ? "page" : undefined}
+              className={active ? "sidebar-link sidebar-link--active" : "sidebar-link"}
+              onClick={() => { if (href !== pathname) setPending({ path: href, from: pathname }); }}
+            >
               <Icon size={19} strokeWidth={2} />
               <span>{label}</span>
               {active && <motion.i layoutId="nav-active" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
@@ -46,6 +58,8 @@ export function Nav({ totalDeaths, currentTry }: { totalDeaths: number; currentT
           );
         })}
       </nav>
+
+      {isPending && <div className="sidebar-loading" role="status"><span />Cargando sección…</div>}
 
       <div className="sidebar-footer">
         <div className="death-counter">
