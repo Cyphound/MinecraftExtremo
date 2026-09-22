@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/inter/wght.css";
-import "@fontsource-variable/space-grotesk/wght.css";
+import "@fontsource/jersey-10";
+import "@fontsource/oxanium/400.css";
+import "@fontsource/oxanium/600.css";
+import "@fontsource/oxanium/700.css";
 import { MotionProvider } from "@/components/motion";
 import "./globals.css";
 
@@ -10,7 +13,7 @@ export const metadata: Metadata = {
   applicationName: "Minecraft Extremo Tracker",
 };
 
-export const viewport: Viewport = { themeColor: "#080a09", colorScheme: "dark" };
+export const viewport: Viewport = { themeColor: "#09070f", colorScheme: "dark" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

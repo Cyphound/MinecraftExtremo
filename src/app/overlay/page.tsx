@@ -25,7 +25,7 @@ export default async function OverlayPage() {
               <div className="mb-4 flex items-center gap-3"><RealmMark/><div><p className="eyebrow">Hardcore Realm</p><BiomeLegend/></div></div>
               <h1 className="mc-title pixel-shadow text-4xl leading-[.9] sm:text-6xl">MINECRAFT <strong>EXTREMO</strong></h1>
             </div>
-            <div className="text-right"><p className="eyebrow">TRY actual</p><p className="display-font mt-2 text-5xl font-bold text-[#77ed92]">#{current?.try_number ?? "—"}</p></div>
+            <div className="text-right"><p className="eyebrow">TRY actual</p><p className="display-font mt-2 text-5xl font-bold text-[#c5a4ff]">#{current?.try_number ?? "—"}</p></div>
           </header>
 
           <section className="grid gap-5 md:grid-cols-3">
@@ -33,17 +33,17 @@ export default async function OverlayPage() {
               const stats = playerStats(player, data.runs);
               return (
                 <article key={player.id} className="panel overflow-hidden p-6 text-center">
-                  <span className={`absolute inset-x-0 top-0 h-[3px] ${index === 0 ? "bg-[#6de28f]" : index === 1 ? "bg-[#f16a64]" : "bg-[#a982e8]"}`} />
+                  <span className={`absolute inset-x-0 top-0 h-[3px] ${index === 0 ? "bg-[#8eb9ff]" : index === 1 ? "bg-[#d27dff]" : "bg-[#a98cff]"}`} />
                   <p className="display-font text-2xl font-bold">{player.name}</p>
-                  <p className="display-font mt-3 flex items-center justify-center gap-2 text-4xl font-bold text-[#ff666b]"><Skull size={28}/>{stats.deaths}</p>
-                  <p className="mt-2 text-sm text-[#77847c]">racha {stats.currentStreak} TRYs</p>
+                  <p className="display-font mt-3 flex items-center justify-center gap-2 text-4xl font-bold text-[#d68cff]"><Skull size={28}/>{stats.deaths}</p>
+                  <p className="mt-2 text-sm text-[#8d8498]">racha {stats.currentStreak} TRYs</p>
                 </article>
               );
             })}
           </section>
 
           <footer className="grid gap-5 sm:grid-cols-2">
-            <div className="panel p-6"><p className="eyebrow">Mejor TRY</p><p className="display-font mt-2 text-3xl font-bold text-[#f6c85f]">{progressName(best)}</p></div>
+            <div className="panel p-6"><p className="eyebrow">Mejor TRY</p><p className="display-font mt-2 text-3xl font-bold text-[#9fc6ff]">{progressName(best)}</p></div>
             <div className="panel p-6"><p className="eyebrow">Tiempo actual</p><p className="display-font mt-2 font-mono text-4xl font-bold">{current?.status === "active" ? <ElapsedTime startedAt={current.started_at}/> : "00:00:00"}</p></div>
           </footer>
         </div>

@@ -1,9 +1,10 @@
 import "server-only";
+import { cache } from "react";
 import { createAdminClient, isSupabaseConfigured } from "@/lib/supabase/admin";
 import { demoEvents, demoPlayers, demoPunishments, demoRuns } from "@/lib/demo-data";
 import type { AppData, Player, Punishment, Run, RunEvent } from "@/types/database";
 
-export async function getAppData(): Promise<AppData> {
+export const getAppData = cache(async function getAppData(): Promise<AppData> {
   if (!isSupabaseConfigured()) {
     return { players: demoPlayers, runs: demoRuns, punishments: demoPunishments, isDemo: true };
   }
@@ -35,7 +36,7 @@ export async function getAppData(): Promise<AppData> {
       error: "No se pudo conectar con Supabase. Se muestran datos de demostración.",
     };
   }
-}
+});
 
 export async function getRun(id: string): Promise<{ run: Run | null; events: RunEvent[]; isDemo: boolean }> {
   if (!isSupabaseConfigured()) {

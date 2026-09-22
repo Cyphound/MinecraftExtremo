@@ -5,10 +5,10 @@ import { Lift } from "@/components/motion";
 import type { RunStatus } from "@/types/database";
 
 const statusConfig = {
-  active: { label: "EN CURSO", className: "bg-[#16341f]/80 text-[#8af0a2] border-[#387548]", icon: Circle },
-  failed: { label: "FALLIDO", className: "bg-[#3a171a]/85 text-[#ff8589] border-[#713139]", icon: Skull },
-  completed: { label: "COMPLETADO", className: "bg-[#392f16]/85 text-[#ffdb7e] border-[#75602b]", icon: Trophy },
-  cancelled: { label: "CANCELADO", className: "bg-[#222723]/85 text-[#abb4ae] border-[#465048]", icon: Ban },
+  active: { label: "EN CURSO", className: "bg-[#25204a]/85 text-[#b9c6ff] border-[#514b91]", icon: Circle },
+  failed: { label: "FALLIDO", className: "bg-[#3b1e49]/85 text-[#e2a0ff] border-[#774f8c]", icon: Skull },
+  completed: { label: "COMPLETADO", className: "bg-[#2c294c]/85 text-[#d9d0ff] border-[#625f94]", icon: Trophy },
+  cancelled: { label: "CANCELADO", className: "bg-[#24202a]/85 text-[#aaa2b3] border-[#4c4555]", icon: Ban },
 } satisfies Record<RunStatus, { label: string; className: string; icon: typeof Circle }>;
 
 export function StatusBadge({ status }: { status: RunStatus }) {
@@ -22,14 +22,14 @@ export function StatusBadge({ status }: { status: RunStatus }) {
   );
 }
 
-export function StatCard({ label, value, detail, accent = "green" }: { label: string; value: ReactNode; detail?: ReactNode; accent?: "green" | "red" | "gold" }) {
+export function StatCard({ label, value, detail, accent = "violet" }: { label: string; value: ReactNode; detail?: ReactNode; accent?: "violet" | "amethyst" | "blue" }) {
   return (
     <Lift>
       <article className="panel panel-interactive h-full overflow-hidden p-5">
-        <span className={clsx("absolute left-5 top-0 h-[3px] w-12", accent === "green" && "bg-[#68df84]", accent === "red" && "bg-[#f45e64]", accent === "gold" && "bg-[#edbf59]")} />
-        <p className="mb-3 text-[.68rem] font-bold uppercase tracking-[.15em] text-[#849188]">{label}</p>
+        <span className={clsx("absolute left-5 top-0 h-[3px] w-12", accent === "violet" && "bg-[#aa87ff]", accent === "amethyst" && "bg-[#d27dff]", accent === "blue" && "bg-[#8eb9ff]")} />
+        <p className="mb-3 text-[.68rem] font-bold uppercase tracking-[.15em] text-[#8d8498]">{label}</p>
         <div className="stat-value">{value}</div>
-        {detail && <div className="mt-2 text-sm text-[#859188]">{detail}</div>}
+        {detail && <div className="mt-2 text-sm text-[#8c8496]">{detail}</div>}
       </article>
     </Lift>
   );

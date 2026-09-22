@@ -2,8 +2,12 @@ import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { Nav } from "@/components/nav";
 import { hasValidSession } from "@/lib/auth";
+import { getAppData } from "@/lib/data";
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   if (!(await hasValidSession())) redirect("/login");
-  return <><Nav/><main className="container-app py-7 sm:py-10">{children}</main><footer className="container-app mb-5 border-t border-white/8 py-8 text-center text-xs text-[#59645d]">Hardcore Realm Log · construido para sobrevivir juntos</footer></>;
+  const data = await getAppData();
+  const totalDeaths = data.runs.filter((run) => run.status === "failed").length;
+  const currentTry = data.runs.find((run) => run.status === "active")?.try_number ?? data.runs[0]?.try_number ?? null;
+  return <div className="app-shell"><Nav totalDeaths={totalDeaths} currentTry={currentTry}/><div className="app-stage"><main className="content-stage">{children}</main><footer className="app-footer">Hardcore Realm Log · tres jugadores, un solo mundo</footer></div></div>;
 }

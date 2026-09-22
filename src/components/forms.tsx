@@ -14,7 +14,7 @@ function Submit({ children, className = "btn btn-primary", disabled = false }: {
 
 function Message({ state }: { state: ActionState }) {
   if (!state) return null;
-  return <p aria-live="polite" className={`rounded-lg px-3 py-2 text-sm ${state.error ? "bg-[#41191c] text-[#ff9699]" : "bg-[#173b23] text-[#8aefa6]"}`}>{state.error ?? state.success}</p>;
+  return <p aria-live="polite" className={`rounded-lg px-3 py-2 text-sm ${state.error ? "bg-[#3d1f48] text-[#e5adff]" : "bg-[#222344] text-[#bdc8ff]"}`}>{state.error ?? state.success}</p>;
 }
 
 export function LoginForm() {
@@ -29,7 +29,7 @@ export function DeathDialog({ players, disabled }: { players: Player[]; disabled
   return <>
     <button onClick={()=>dialog.current?.showModal()} className="btn btn-danger danger-glow w-full py-4 text-base sm:w-auto sm:px-8"><Skull size={21}/> REGISTRAR MUERTE</button>
     <dialog ref={dialog} className="glass-shell m-auto max-h-[92vh] w-[min(94vw,620px)] overflow-y-auto rounded-[1.6rem] p-0 text-white shadow-2xl">
-      <div className="flex items-start justify-between border-b border-white/10 p-5 sm:p-6"><div className="flex items-center gap-3"><span className="grid size-11 place-items-center border border-[#74373b] bg-[#36181b] text-[#ff777c]"><Skull size={21}/></span><div><p className="eyebrow mb-1 text-[#ff7378]">Fin del intento</p><h2 className="display-font text-2xl font-bold">Registrar muerte</h2></div></div><button onClick={()=>dialog.current?.close()} className="btn btn-ghost size-10 min-h-0 p-0" aria-label="Cerrar"><X size={18}/></button></div>
+      <div className="flex items-start justify-between border-b border-white/10 p-5 sm:p-6"><div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-xl border border-[#76518a] bg-[#321d40] text-[#d996ff]"><Skull size={21}/></span><div><p className="eyebrow mb-1">Fin del intento</p><h2 className="display-font text-2xl font-bold">Registrar muerte</h2></div></div><button onClick={()=>dialog.current?.close()} className="btn btn-ghost size-10 min-h-0 p-0" aria-label="Cerrar"><X size={18}/></button></div>
       <form action={action} className="grid gap-5 p-5 sm:p-6" onSubmit={()=>{ if(!state?.error) window.setTimeout(()=>dialog.current?.close(),600); }}>
         <label className="label">Jugador que murió<select className="input" name="playerId" required defaultValue=""><option value="" disabled>Selecciona un jugador</option>{players.map(p=><option key={p.id} value={p.id}>{p.name}{p.nickname?` · ${p.nickname}`:""}</option>)}</select></label>
         <div className="grid gap-5 sm:grid-cols-2"><label className="label">Causa<select className="input" name="cause" required value={cause} onChange={e=>setCause(e.target.value)}><option value="" disabled>Selecciona una causa</option>{DEATH_CAUSES.map(item=><option key={item}>{item}</option>)}</select></label><label className="label">Dimensión<select className="input" name="dimension" required defaultValue="Overworld">{DIMENSIONS.map(item=><option key={item}>{item}</option>)}</select></label></div>
